@@ -1,0 +1,170 @@
+import pygame
+import time
+pygame.init()
+from pygame.locals import ( 
+    K_z,
+    K_x,  
+    K_UP,
+    K_DOWN,
+    K_LEFT,
+    K_RIGHT,
+    K_ESCAPE,
+    KEYDOWN,
+    QUIT,
+)
+x = 860
+y = 750
+w = 1450
+z = 230
+ 
+RIGHT = pygame.image.load(r'D:\\python\\python_arts\\Hero_right.png') 
+LEFT = pygame.image.load(r'D:\\python\\python_arts\\Hero_left.png') 
+DOWN = pygame.image.load(r'D:\\python\\python_arts\\hero_dow.png')
+UP = pygame.image.load(r'D:\python\python_arts\Hero_up.png')
+left = False
+right = True
+down = False
+up = False
+
+first_load=False
+
+map_loader=5
+
+map4 = pygame.image.load(r'D:\\python\\python_arts\\map_4.png')
+map5 = pygame.image.load(r'D:\\python\\python_arts\\map_5.png')
+
+txt=True
+speed = 15
+speed_return = speed
+RED = (245, 66, 66)
+white = (255, 255, 255)
+black = (0, 0, 0)
+NPC_intro = pygame.image.load(r'D:\python\python_arts\\NPC_intro.png')
+screen = pygame.display.set_mode((1920,1080))
+
+
+font = pygame.font.Font('freesansbold.ttf', 17)
+#LINE
+text2 = font.render('Hello friend!'
+' Nice to meet you at this time of the day!'
+' I need your help. The hole village is full of garbage. '
+' Please help me clean it!',True,black)
+text2Rect = text2.get_rect()
+text2Rect = (850,0)
+text = font.render('Press Escape to exit', True, black) 
+textRect = text.get_rect()
+textRect = (40,40)
+
+clock = pygame.time.Clock()
+FPS = 120
+
+def Touch(x,y,left,right,down):
+    if left:
+        screen.blit(LEFT,(x,y))
+    if right:
+        screen.blit(RIGHT,(x,y))
+    if down:
+        screen.blit(DOWN,(x,y))
+    if up:
+        screen.blit(UP,(x,y))
+
+
+while True:
+    clock.tick(FPS)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            quit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                quit()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        x -= speed
+        left = True
+        right = False
+        down = False
+        up = False
+    if keys[pygame.K_RIGHT]:
+        x += speed
+        left = False
+        right = True
+        down = False
+        up = False
+    if keys[pygame.K_UP]:
+        y -= speed
+        left = False
+        right = False
+        down = False
+        up = True
+    if keys[pygame.K_DOWN]:
+        y += speed
+        left = False
+        right = False
+        down = True
+        up = False
+    if map_loader==5:
+        if first_load:
+            x=0-x
+            first_load=False
+        if y<0:
+            y=0
+        if y<250:
+            y=250
+        if y>560 and y<800 and x>1430 and x<1685:
+            if right:
+                x=1430
+            if down:
+                y=560
+            if up:
+                y=800
+            if left:
+                x=1685
+        if y>450 and x<0:
+            x = 0
+        if x<635 and y>900:
+            y = 900
+        if x>975 and y>900:
+            y = 900
+        if y>600 and x>1805:
+            x = 1805
+        if x<=1580 and x>=1460 and y>=250 and y<=520:
+            if keys[pygame.K_z]:
+                screen.blit(text2, text2Rect)       
+        if y>=560 and y<=800 and x>=1430 and x<=1685:
+            text = font.render("Hold Z to throw a trash", True, black)
+            text3Rect = text.get_rect()
+            screen.blit(text,text3Rect)
+            text3Rect = (0,0)
+
+        if x>=1460 and x<=1540 and y<395:
+            text = font.render('Hold Z to talk with the farmer', True, black)
+            textRect = text.get_rect()
+            screen.blit(text,textRect)
+            textRect = (1460,180)
+        screen.blit(map5,(0,0))
+        screen.blit(NPC_intro,(w,z))
+        if x<-10:
+            map_loader=4
+            first_load=True
+        if x>1920:
+            map_loader=6
+            first_load=True
+        if y>1080:
+            map_loader=8
+            first_load=True
+    if map_loader==4:
+        if first_load:
+            x=1980-x
+            first_load=False
+        screen.blit(map4,(0,0))
+        '''if x>1920:
+            map_loader=5
+            first_load=True'''
+        if x<475:
+            x=475
+    Touch(x,y,left,right,down)
+    print(x,y)
+    pygame.display.update() 
+    
+    
+    
