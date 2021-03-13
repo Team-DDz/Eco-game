@@ -16,22 +16,36 @@ x = 860
 y = 750
 w = 1450
 z = 230
+
  
 RIGHT = pygame.image.load(r'D:\\python\\python_arts\\Hero_right.png') 
 LEFT = pygame.image.load(r'D:\\python\\python_arts\\Hero_left.png') 
 DOWN = pygame.image.load(r'D:\\python\\python_arts\\hero_dow.png')
 UP = pygame.image.load(r'D:\python\python_arts\Hero_up.png')
+
+bottles = pygame.image.load(r'D:\\python\\python_arts\\Garbage_bottles.png') 
+sakura = pygame.image.load(r'D:\python\python_arts\\Sakura1.png')
+fenceClosed = pygame.image.load(r'D:\\python\\python_arts\\Fence_closed.png')
+fenceOpened = pygame.image.load(r'D:\\python\\python_arts\\Fence_open2.png')
+
 left = False
 right = True
 down = False
 up = False
+open = False
 
 first_load=False
 
 map_loader=5
+last_map=0
 
 map4 = pygame.image.load(r'D:\\python\\python_arts\\map_4.png')
 map5 = pygame.image.load(r'D:\\python\\python_arts\\map_5.png')
+map6 = pygame.image.load(r'D:\\python\\python_arts\\map_6.png')
+map7 = pygame.image.load(r'D:\\python\\python_arts\\map_7.png')
+map8 = pygame.image.load(r'D:\\python\\python_arts\\map_8.png')
+map9 = pygame.image.load(r'D:\\python\\python_arts\\map_9.png')
+
 
 txt=True
 speed = 15
@@ -49,6 +63,7 @@ text2 = font.render('Hello friend!'
 ' Nice to meet you at this time of the day!'
 ' I need your help. The hole village is full of garbage. '
 ' Please help me clean it!',True,black)
+
 text2Rect = text2.get_rect()
 text2Rect = (850,0)
 text = font.render('Press Escape to exit', True, black) 
@@ -56,7 +71,7 @@ textRect = text.get_rect()
 textRect = (40,40)
 
 clock = pygame.time.Clock()
-FPS = 120
+FPS = 200
 
 def Touch(x,y,left,right,down):
     if left:
@@ -102,69 +117,280 @@ while True:
         right = False
         down = True
         up = False
-    if map_loader==5:
+    #MAP9
+    if map_loader==9:
+        screen.blit(map9,(0,0))
         if first_load:
-            x=0-x
-            first_load=False
-        if y<0:
-            y=0
+            if last_map==6:
+                y=1100-y
+            else: x=2000-x
+        first_load=False
+        Touch(x,y,left,right,down)
+        if x < -5 and y > 525:
+            x =- 5
+        if y > 890:
+            y = 890
+        if x < 25 and y < 175:
+            x = 25
+        if y>815 and y<635 and x>735:
+            if right:
+                x = 735
+            if up:
+                y = 635
+            if down:
+                y = 815
+        if x>950 and x <= 1160 and y < 621:
+                y=621
+        if x >= 1161 and y >= 621 and y < 860:
+            x=1160
+        if x > 950 and x <= 1160 and y >= 800:
+            y = 800
+        if x > 920 and y < 610:
+            x=920
+        if x > 920 and y > 840:
+            x = 920
+        if y <- 10:
+            map_loader = 6
+            first_load = True
+        if x <- 10:
+            map_loader = 8
+            first_load = True
+        last_map = 9
+            
+        
+    #MAP8
+    if map_loader == 8:
+        screen.blit(map8,(0,0))
+        if first_load:
+            if last_map == 5:
+                y = 1100-y
+            if last_map == 7:
+                x =- 10
+            if last_map == 9: 
+                x = 1900
+        first_load = False
+        Touch(x,y,left,right,down)
+        if x < 10 and y < 155:
+            x=10
+        if x < -35 and y > 545:
+            x =- 35
+        if y > 515 and x > 1795:
+            x = 1795
+        if x > 1810 and y < 155:
+            x = 1810
+        if y >= 815:
+            y = 815
+        if y < 5 and x < 530:
+            y = 5
+        if y < 5 and x > 1145:
+            y = 5
+        if y <- 10:
+            map_loader = 5
+            first_load = True
+        if x<-10:
+            map_loader = 7
+            first_load = True
+
+        if x>1920:
+            map_loader = 9
+            first_load = True
+        last_map=8 
+    
+    #MAP7
+    if map_loader == 7:
+        screen.blit(map7,(0,0))
+        if first_load:
+            if last_map == 8:
+                x=1900
+            if last_map == 4:
+                y = 1100-y
+        first_load = False
+        if x>1920:
+            map_loader = 8
+            first_load = True
+        Touch(x,y,left,right,down)
+        if y >- 205 and x < 790:
+            x = 790
+        if x > 0 and y > 450:
+            y = 450
+        if y < 230 and y >- 225 and x > 1150 and x < 1360:
+            if right:
+                x = 1150
+            if up:
+                y = 230
+            if left:
+                x = 1360 
+        '''if x>1150 and x<1360 and y<230:
+            y=230'''
+        if x > 1805 and y < 40:
+            x = 1805
+        if x > 1490 and x < 1920 and y < 230 and y > 35:
+            if up:
+                y = 230
+            if down:
+                y = 35
+            if right:
+                x = 1490
+        if x > 1150 and x < 1910 and y <- 65:
+            y=-65
+        if x > 1860 and x <- 200 and y < 35 and y <- 200:
+            if right:
+                x = 1860
+        if y <- 90:
+            map_loader = 4
+            first_load = True
+        screen.blit(fenceOpened,(816,535))
+        last_map = 7
+
+        
+
+
+
+    #MAP6
+    if map_loader == 6:
+        screen.blit(map6,(0,0))
+        if first_load:
+            if last_map == 5:
+                x = 2000-x
+            else: y = 900-y 
+        first_load = False
+        Touch(x,y,left,right,down)
+        if y >- 195 and x > 960:
+            x = 960
+        if  y <- 20 and x > 0 and x < 165:
+            if left:
+                x = 165
+            if up:
+                y =- 20
+        if y < 355 and y > 25 and x > 410 and x < 980:
+            if right:
+                x = 410
+            if up:
+                y = 355
+            if down:
+                y = 25
+        if y < 235 and x  <0:
+            x = 0
+        if y > 565 and x <- 5:
+            x = -5
+        if x <- 10:
+            map_loader = 5
+            first_load = True
+        if y>1080:
+            map_loader = 9
+            first_load = True
+        last_map = 6
+        
+    #MAP5
+    if map_loader == 5:
+        screen.blit(map5,(0,0))
+        if first_load:
+            if last_map == 4 or last_map == 6:
+                x = 1920-x
+            else: y = 1040-y
+            if last_map == 4:
+                y = y+50
+            first_load = False
         if y<250:
             y=250
-        if y>560 and y<800 and x>1430 and x<1685:
+        if y > 560 and y < 800 and x > 1430 and x < 1685:
             if right:
-                x=1430
+                x = 1430
             if down:
-                y=560
+                y = 560
             if up:
-                y=800
+                y = 800
             if left:
-                x=1685
-        if y>450 and x<0:
+                x = 1685
+        if y > 450 and x < 0:
             x = 0
-        if x<635 and y>900:
+        if x < 635 and y > 900:
             y = 900
-        if x>975 and y>900:
+        if x > 975 and y > 900:
             y = 900
-        if y>600 and x>1805:
+        if y > 600 and x > 1805:
             x = 1805
-        if x<=1580 and x>=1460 and y>=250 and y<=520:
+        if x <= 1580 and x >= 1460 and y >= 250 and y <= 520:
             if keys[pygame.K_z]:
                 screen.blit(text2, text2Rect)       
-        if y>=560 and y<=800 and x>=1430 and x<=1685:
+        if y >= 560 and y <= 800 and x >= 1430 and x <= 1685:
             text = font.render("Hold Z to throw a trash", True, black)
-            text3Rect = text.get_rect()
-            screen.blit(text,text3Rect)
-            text3Rect = (0,0)
+            textRect=(0,0)
+            screen.blit(text,textRect)
 
-        if x>=1460 and x<=1540 and y<395:
+
+        if x >= 1460 and x <= 1540 and y < 395:
             text = font.render('Hold Z to talk with the farmer', True, black)
             textRect = text.get_rect()
             screen.blit(text,textRect)
             textRect = (1460,180)
-        screen.blit(map5,(0,0))
         screen.blit(NPC_intro,(w,z))
-        if x<-10:
-            map_loader=4
-            first_load=True
-        if x>1920:
-            map_loader=6
-            first_load=True
+        if x <- 10:
+            map_loader = 4
+            first_load = True
+        if x>1980:
+            map_loader = 6
+            first_load = True
         if y>1080:
-            map_loader=8
-            first_load=True
-    if map_loader==4:
+            map_loader = 8
+            first_load = True
+        Touch(x,y,left,right,down)
+        last_map = 5
+
+
+    #MAP 4
+    if map_loader == 4:
         if first_load:
-            x=1980-x
-            first_load=False
+            if last_map == 5:
+                x = 1750-x
+                y = y-50
+            if last_map == 7:
+                y = 1070
+        first_load = False
         screen.blit(map4,(0,0))
-        '''if x>1920:
-            map_loader=5
-            first_load=True'''
-        if x<475:
-            x=475
-    Touch(x,y,left,right,down)
-    print(x,y)
+        if x > 1900:
+            map_loader = 5
+            first_load = True
+        if y >= 1130:
+            map_loader = 7
+            first_load = True
+        if x < 460:
+            x = 460   
+        if y < 215 and x > 1050:
+            if right:
+                x = 1050
+            if down:
+                y = -180
+            if up:
+                y = 215
+            if left:
+                x = 10
+        if y > 410 and x > 1080:
+            if right:
+                x = 1080
+            if down:
+                y = 410
+
+        if y < 515 and y > 380 and x > 595 and x < 925:
+            if right:
+                x = 595
+            if left:
+                x = 925
+            if up:
+                y = 515
+            if down:
+                y = 380       
+        Touch(x,y,left,right,down)
+        screen.blit(fenceClosed,(1181,500))
+        if y < 400:
+            screen.blit(sakura,(608,0))
+        last_map = 4
+
+        
+    
+    print(x,y,right,map_loader,last_map)
     pygame.display.update() 
     
     
     
+
